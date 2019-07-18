@@ -17,3 +17,6 @@ if __name__ == '__main__':
 
     hsh1.clear()
     print(str(hsh1))
+
+
+    # tutaj mamy koniec naszej zabawy
