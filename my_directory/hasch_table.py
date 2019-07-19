@@ -25,6 +25,32 @@ class MultiHashSet:
         if to_remove in self.buckets[bucket_index]:
             self.buckets[bucket_index].remove(to_remove)
 
+    def remove_all(self, item):
+        item_bucket = hash(item) % len(self.buckets)
+        bucket = self.buckets[item_bucket]
+        self.buckets[item_bucket] = [x for x in bucket if x != item]
+        self.length = len(bucket) - len(self.buckets[item_bucket])
+
+    def __len__(self):
+        return self.length
+
+    def add_all(self, elements):
+        for element in elements:
+            self.add(element)
+
+    # TA FUNCJA POWINNA SIE ZMIENIĆ
+    def _increase_bucket_count(self)
+        new_buckets = [[] for _i in range(self.INCREASE_FACTOR * len(self.buckets))]
+        for old_bucket in self.buckets:
+            for element in old_bucket:
+                new_bucket_index = hash(element) % len(new_buckets)
+                new_buckets[new_bucket_index].append(element)
+        self.buckets = new_buckets
+
+
+
+
+
     def contains(self, item):
         item_bucket_index = hash(item) % len(self.buckets)
         return item in self.buckets[item_bucket_index]
@@ -45,10 +71,5 @@ class MultiHashSet:
     def clear(self):
         self.buckets = []
 
-    def _increase_bucket_count(self):
-        new_buckets = [[] for _i in range(self.INCREASE_FACTOR * len(self.buckets))]
-        for old_bucket in self.buckets:
-            for element in old_bucket:
-                new_bucket_index = hash(element) % len(new_buckets)
-                new_buckets[new_bucket_index].append(element)
-        self.buckets = new_buckets
+
+
