@@ -1,22 +1,18 @@
-from my_directory.hasch_table import *
+from my_directory.json_iris import *
 
 
 if __name__ == '__main__':
 
-    hsh1 = MultiHashSet()
+    file_path = "data/iris.data"
 
-    hsh1.add('Hello 1')
-    hsh1.add('Hello 2')
-    hsh1.add('Hello 3')
+    with open(file_path, 'r', encoding="utf-8") as f:
+        working_data_set: list = [edit_line(line) for line in f]
+    working_data_set: list = [to_good_type(line) for line in working_data_set]
 
-    print(str(hsh1))
-    print('Hello 3')
-    hsh1.remove('Hello 1')
-    print(str(hsh1))
-    print(hsh1.contains("Hello 1"))
+    print(working_data_set)
 
-    hsh1.clear()
-    print(str(hsh1))
+    data = working_data_set
+    attributes = ['petal length', 'petal width', 'sepal length', 'sepal width', 'species']
+    save_file_path = 'data/iris.json'
+    serialize_json(data, save_file_path, attributes)
 
-
-    # tutaj mamy koniec naszej zabawy
