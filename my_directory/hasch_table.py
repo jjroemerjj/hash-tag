@@ -1,4 +1,3 @@
-
 class MultiHashSet:
     INITIAL_BUCKETS_SIZE: int = 16
     INCREASE_FACTOR: int = 2
@@ -47,9 +46,10 @@ class MultiHashSet:
                 new_buckets[new_bucket_index].append(element)
         self.buckets = new_buckets
 
-
-
-
+    def clear(self):
+        for bucket in self.buckets:
+            bucket.clear()
+        self.length = 0
 
     def contains(self, item):
         item_bucket_index = hash(item) % len(self.buckets)
@@ -68,8 +68,26 @@ class MultiHashSet:
         result += '}'
         return result
 
-    def clear(self):
+    def my_clear(self):
         self.buckets = []
 
+    def __hash__(self):
+        pass
 
+    def __eq__(self, other):
+        this = self._group_elements(self)
+        that = self._group_elements(other)
+        return this == that
 
+    @staticmethod
+    def _group_elements(mhs):
+        elements = []
+        for bucket in mhs.buckets:
+            for element in bucket:
+                elements.append(element)
+        elements_grouped_by = dict()
+        for element in elements:
+            if element not in elements_grouped_by:
+                elements_grouped_by[element] = 0
+            elements_grouped_by[element] += 1
+        return elements_grouped_by
