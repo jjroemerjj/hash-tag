@@ -38,7 +38,7 @@ class MultiHashSet:
             self.add(element)
 
     # TA FUNCJA POWINNA SIE ZMIENIĆ
-    def _increase_bucket_count(self)
+    def _increase_bucket_count(self):
         new_buckets = [[] for _i in range(self.INCREASE_FACTOR * len(self.buckets))]
         for old_bucket in self.buckets:
             for element in old_bucket:
