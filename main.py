@@ -20,3 +20,4 @@ if __name__ == '__main__':
 
 
     # tutaj mamy koniec naszej zabawy
+    # master goes one
